@@ -1,0 +1,26 @@
+###
+GET  http://localhost:4004/browse/Tasks
+Content-Type: application/json
+
+{
+    "name" : "test the app",
+    "description" : "Build an App",
+    "duedate" : "2024-04-01",
+    "assignee" : [
+        {
+            "empid" : "1088",
+            "isdel" : false
+        }
+    ]
+}
+
+###
+
+POST http://localhost:4004/browse/Employees
+Content-Type: application/json
+
+{
+    "name" : "Varun Gaikwad",
+    "empid" : "10XX",
+    "isdel" : false
+}

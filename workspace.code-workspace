@@ -1,0 +1,10 @@
+{
+    "folders": [
+        {
+            "path": "Modeling"
+        }
+    ],
+    "settings": {
+        "SAP HANA Project Explorer.bind.confirm automatic undeployment": false
+    }
+}

@@ -1,0 +1,79 @@
+<mvc:View
+	controllerName="createtask.controller.Create_Task"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+>
+	<Page
+		id="page"
+		title="{i18n>title}">
+		<content>
+			<f:SimpleForm id="SimpleFormChange354"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="3"
+				labelSpanL="3"
+				labelSpanM="3"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="4"
+				emptySpanL="4"
+				emptySpanM="4"
+				emptySpanS="0"
+				columnsXL="1"
+				columnsL="1"
+				columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Enter Task Name" />
+					<Input
+						value="{gModel>/oPayload/name}"
+						placeholder="Enter text"
+						change="handleChange"
+						ariaLabelledBy="inputTextLabel" />
+
+					<Label text="Enter Task Due Date" />
+					<DatePicker
+					value="{gModel>/oPayload/duedate}"
+					displayFormat="dd/MM/yyyy"
+					valueFormat="yyyy-MM-dd"
+						placeholder="Enter Date"
+						change="handleChange"
+						class="sapUiSmallMarginBottom" />
+						
+					<Label text="Enter Task Description" />
+					<Input
+						value="{gModel>/oPayload/description}"
+						placeholder="Enter text"
+						change="handleChange"
+						ariaLabelledBy="inputTextLabel" />
+					<Label text="Assign To" />
+					<MultiComboBox
+						selectedKeys="{gModel>/assigneeId}"
+						width="100%"
+						items="{path: '/Employees'}">
+						<core:Item key="{empid}" text="{name}" />
+					</MultiComboBox>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button
+					type="Emphasized"
+					text="Draft"
+					press="saveDraft" />
+				<Button
+					type="Accept"
+					text="Submit"
+					press="onSubmit" />
+				<Button
+					type="Reject"
+					text="Cancel" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

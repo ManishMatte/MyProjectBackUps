@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="revenue" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="revenue.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MODELING_STATES">
+    <resourceUri>MODELING_STATES</resourceUri>
+  </DataSource>
+  <DataSource id="MODELING_REVENUES">
+    <resourceUri>MODELING_REVENUES</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="VALUE" aggregationType="sum"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POPULATION" aggregationType="sum"/>
+      <viewAttribute id="COUNTRIES_ID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="POPULATION_1" aggregationType="sum"/>
+      <viewAttribute id="COUNTRIES_ID_1" aggregationType="sum"/>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="VALUE_1" aggregationType="sum"/>
+      <viewAttribute id="ID_1" aggregationType="sum"/>
+      <viewAttribute id="STATES_ID" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$ID$STATES_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MODELING_STATES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POPULATION" source="POPULATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRIES_ID" source="COUNTRIES_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POPULATION_1" source="POPULATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRIES_ID_1" source="COUNTRIES_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$STATES_ID" source="ID"/>
+    </input>
+    <input node="MODELING_REVENUES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUE" source="VALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUE_1" source="VALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID_1" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATES_ID" source="STATES_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$STATES_ID" source="STATES_ID"/>
+    </input>
+    <joinAttribute name="JOIN$ID$STATES_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="STATE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="STATE"/>
+    </attribute>
+    <attribute id="NAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="COUNTRIES_ID$local">
+      <descriptions defaultDescription="COUNTRIES_ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTRIES_ID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="VALUE" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="VALUE"/>
+      <measureMapping columnObjectName="Join_1" columnName="VALUE"/>
+      <exceptionAggregationMetadata>
+        <attribute attributeName="STATE"/>
+        <attribute attributeName="NAME"/>
+      </exceptionAggregationMetadata>
+    </measure>
+    <measure id="POPULATION" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="POPULATION"/>
+      <measureMapping columnObjectName="Join_1" columnName="POPULATION"/>
+      <exceptionAggregationMetadata>
+        <attribute attributeName="STATE"/>
+        <attribute attributeName="NAME"/>
+      </exceptionAggregationMetadata>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="Country">
+      <attributes>
+        <attributeRef>COUNTRIES_ID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>ID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="referential" referentialDirection="left" joinOperator="Equal"/>
+      <associatedAttributeFeatures>
+        <attributeReference alias="state" attributeName="NAME"/>
+        <attributeReference alias="state_id" attributeName="ID"/>
+      </associatedAttributeFeatures>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="203"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="MODELING_STATES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="1772" y="24"/>
+      <rectangleSize width="180"/>
+    </shape>
+    <shape modelObjectName="MODELING_REVENUES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="2064" y="24"/>
+      <rectangleSize width="201"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="16" y="16"/>
+      <rectangleSize width="167.8984375"/>
+    </shape>
+    <shape modelObjectName="Country" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="247.8984375" y="32"/>
+      <rectangleSize width="117.78076171875"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

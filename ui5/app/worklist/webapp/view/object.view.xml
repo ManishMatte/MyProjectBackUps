@@ -1,0 +1,10 @@
+<mvc:View
+		height="100%"
+		controllerName="worklist.controller.object"
+		xmlns:form="sap.ui.layout.form"
+		xmlns:core="sap.ui.core"
+		xmlns:u="sap.ui.unified"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m">
+		<Title text="testing"></Title>
+</mvc:View>
